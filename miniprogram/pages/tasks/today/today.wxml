@@ -1,0 +1,86 @@
+<!-- 今日任务页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">今日任务</text>
+    <text class="page-date">{{todayStr}}</text>
+  </view>
+  
+  <!-- 天气关联提示 -->
+  <view class="weather-tip">
+    <text class="tip-icon">💡</text>
+    <text class="tip-text">{{weatherTip}}</text>
+  </view>
+  
+  <!-- 任务列表 -->
+  <view class="task-section">
+    <view class="section-header">
+      <text class="section-title">待办任务 ({{pendingTasks.length}})</text>
+      <view class="add-task-btn" bindtap="addTask">
+        <text>+ 添加</text>
+      </view>
+    </view>
+    
+    <view class="task-list" wx:if="{{pendingTasks.length > 0}}">
+      <view class="task-card {{item.completed ? 'completed' : ''}}" 
+            wx:for="{{pendingTasks}}" 
+            wx:key="_id"
+            style="border-left-color: {{item.priorityColor}}"
+            bindtap="toggleTask" 
+            data-id="{{item._id}}">
+        <view class="task-checkbox">
+          <text wx:if="{{item.completed}}">✓</text>
+        </view>
+        <view class="task-content">
+          <view class="task-header">
+            <text class="task-icon">{{item.typeIcon}}</text>
+            <text class="task-name">{{item.title}}</text>
+            <view class="priority-tag" style="background: {{item.priorityColor}}">
+              <text>{{item.priority === 'high' ? '高' : item.priority === 'medium' ? '中' : '低'}}</text>
+            </view>
+          </view>
+          <view class="task-meta">
+            <text class="task-crop">🌱 {{item.cropName}}</text>
+          </view>
+        </view>
+        <view class="task-delete" catchtap="deleteTask" data-id="{{item._id}}">
+          <text>×</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-task" wx:else>
+      <text class="empty-icon">✅</text>
+      <text class="empty-text">今日暂无待办任务</text>
+    </view>
+  </view>
+  
+  <!-- 已完成任务 -->
+  <view class="task-section" wx:if="{{completedTasks.length > 0}}">
+    <view class="section-header">
+      <text class="section-title completed-title">已完成 ({{completedTasks.length}})</text>
+    </view>
+    
+    <view class="task-list">
+      <view class="task-card completed" 
+            wx:for="{{completedTasks}}" 
+            wx:key="_id">
+        <view class="task-checkbox">
+          <text>✓</text>
+        </view>
+        <view class="task-content">
+          <view class="task-header">
+            <text class="task-icon">{{item.typeIcon}}</text>
+            <text class="task-name">{{item.title}}</text>
+          </view>
+          <view class="task-meta">
+            <text class="task-crop">🌱 {{item.cropName}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

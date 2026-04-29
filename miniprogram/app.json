@@ -1,0 +1,55 @@
+{
+  "requiredPrivateInfos": ["getLocation"],
+  "pages": [
+    "pages/index/index",
+    "pages/crops/list/list",
+    "pages/crops/detail/detail",
+    "pages/crops/edit/edit",
+    "pages/crops/add/add",
+    "pages/tasks/calendar/calendar",
+    "pages/tasks/today/today",
+    "pages/tasks/add/add",
+    "pages/irrigation/irrigation",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2E7D32",
+    "navigationBarTitleText": "智慧农业",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#2E7D32",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/crops/list/list",
+        "text": "作物",
+        "iconPath": "images/icons/goods.png",
+        "selectedIconPath": "images/icons/goods-active.png"
+      },
+      {
+        "pagePath": "pages/tasks/today/today",
+        "text": "任务",
+        "iconPath": "images/icons/business.png",
+        "selectedIconPath": "images/icons/business-active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "images/icons/usercenter.png",
+        "selectedIconPath": "images/icons/usercenter-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

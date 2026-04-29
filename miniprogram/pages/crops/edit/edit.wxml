@@ -1,0 +1,86 @@
+<!-- 编辑作物页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="goBack">
+    <text>← 返回</text>
+  </view>
+  
+  <!-- 页面标题 -->
+  <view class="page-title">
+    <text>编辑作物</text>
+  </view>
+  
+  <!-- 选择作物类型 -->
+  <view class="section">
+    <view class="section-title">作物类型</view>
+    <view class="crop-grid">
+      <view class="crop-option {{selectedCrop === item.value ? 'active' : ''}}" 
+            wx:for="{{cropTypes}}" 
+            wx:key="value"
+            bindtap="selectCrop" 
+            data-value="{{item.value}}"
+            data-type="{{item.type}}">
+        <text class="crop-option-icon">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 作物名称 -->
+  <view class="section">
+    <view class="section-title">作物名称 *</view>
+    <input class="input-field" placeholder="请输入作物名称" value="{{name}}" bindinput="onNameInput" />
+  </view>
+  
+  <!-- 品种选择 -->
+  <view class="section">
+    <view class="section-title">品种</view>
+    <view class="picker-box">
+      <picker mode="selector" range="{{varieties}}" bindchange="onVarietyChange">
+        <view class="picker-wrap {{selectedVariety ? '' : 'placeholder'}}">
+          <text class="picker-value">{{selectedVariety || '请选择品种'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <!-- 种植日期 -->
+  <view class="section">
+    <view class="section-title">种植日期</view>
+    <view class="picker-box">
+      <picker mode="date" value="{{plantDate}}" bindchange="onDateChange">
+        <view class="picker-wrap {{plantDate ? '' : 'placeholder'}}">
+          <text class="picker-value">{{plantDate || '请选择日期'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <!-- 生长状态 -->
+  <view class="section">
+    <view class="section-title">生长状态</view>
+    <view class="picker-box">
+      <picker mode="selector" range="{{statusOptions}}" range-key="name" bindchange="onStatusChange">
+        <view class="picker-wrap {{status ? '' : 'placeholder'}}">
+          <text class="picker-value">{{status === 'seedling' ? '幼苗期' : status === 'growth' ? '生长期' : '待收获'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <!-- 备注 -->
+  <view class="section">
+    <view class="section-title">备注</view>
+    <textarea class="textarea-field" placeholder="添加备注信息（可选）" value="{{notes}}" bindinput="onNotesInput" />
+  </view>
+  
+  <!-- 提交按钮 -->
+  <view class="submit-btn" bindtap="submitForm">
+    <text>保存修改</text>
+  </view>
+</view>

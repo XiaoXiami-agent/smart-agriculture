@@ -1,0 +1,201 @@
+/* 今日任务页面样式 */
+page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 20rpx 30rpx;
+}
+
+.status-bar {
+  height: 60rpx;
+}
+
+/* 页面头部 */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.page-date {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 天气提示 */
+.weather-tip {
+  background: #E8F5E9;
+  padding: 25rpx 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tip-icon {
+  font-size: 36rpx;
+  margin-right: 15rpx;
+}
+
+.tip-text {
+  font-size: 28rpx;
+  color: #4CAF50;
+  flex: 1;
+}
+
+/* 任务区块 */
+.task-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.completed-title {
+  color: #999;
+}
+
+.add-task-btn {
+  background: #4CAF50;
+  color: #fff;
+  padding: 12rpx 25rpx;
+  border-radius: 25rpx;
+  font-size: 26rpx;
+}
+
+/* 任务列表 */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.task-card {
+  display: flex;
+  align-items: center;
+  padding: 25rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  border-left: 6rpx solid #4CAF50;
+  transition: all 0.3s;
+}
+
+.task-card.completed {
+  opacity: 0.6;
+  border-left-color: #ccc;
+}
+
+.task-card.completed .task-name {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-checkbox {
+  width: 48rpx;
+  height: 48rpx;
+  border: 3rpx solid #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  color: #4CAF50;
+  font-size: 28rpx;
+}
+
+.task-card.completed .task-checkbox {
+  background: #4CAF50;
+  border-color: #4CAF50;
+  color: #fff;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+  flex-wrap: wrap;
+}
+
+.task-icon {
+  font-size: 36rpx;
+  margin-right: 15rpx;
+}
+
+.task-name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  margin-right: 15rpx;
+}
+
+.priority-tag {
+  font-size: 20rpx;
+  color: #fff;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+}
+
+.task-meta {
+  display: flex;
+  gap: 20rpx;
+}
+
+.task-crop {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.task-time {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.task-delete {
+  padding: 10rpx 20rpx;
+  color: #ccc;
+  font-size: 40rpx;
+}
+
+/* 空状态 */
+.empty-task {
+  text-align: center;
+  padding: 60rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #4CAF50;
+}

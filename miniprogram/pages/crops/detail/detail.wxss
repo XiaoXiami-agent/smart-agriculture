@@ -1,0 +1,158 @@
+/* 作物详情页面样式 */
+page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 20rpx 30rpx;
+}
+
+.status-bar {
+  height: 60rpx;
+}
+
+.back-btn {
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  color: #4CAF50;
+  font-size: 30rpx;
+}
+
+/* 作物信息卡片 */
+.crop-info-card {
+  background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  color: #fff;
+}
+
+.crop-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.crop-icon {
+  font-size: 80rpx;
+  margin-right: 25rpx;
+}
+
+.crop-title {
+  flex: 1;
+}
+
+.crop-name {
+  font-size: 40rpx;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.crop-variety {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.crop-status {
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  background: rgba(255,255,255,0.2);
+}
+
+.crop-stats {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 30rpx;
+  border-top: 1rpx solid rgba(255,255,255,0.3);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* 信息区块 */
+.info-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 25rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 25rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25rpx;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.notes-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 25rpx;
+  margin-top: 40rpx;
+}
+
+.action-btn {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+}
+
+.edit-btn {
+  background: #4CAF50;
+  color: #fff;
+}
+
+.delete-btn {
+  background: #fff;
+  color: #F44336;
+  border: 2rpx solid #F44336;
+}

@@ -1,0 +1,60 @@
+<!-- 作物列表页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">我的作物</text>
+    <view class="add-btn" bindtap="goToAdd">
+      <text>+ 添加作物</text>
+    </view>
+  </view>
+  
+  <!-- 作物列表 -->
+  <view class="crop-list" wx:if="{{crops.length > 0}}">
+    <view class="crop-card" wx:for="{{crops}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="crop-header">
+        <text class="crop-icon">{{item.icon}}</text>
+        <view class="crop-info">
+          <text class="crop-name">{{item.name}}</text>
+          <text class="crop-variety">{{item.variety}}</text>
+        </view>
+        <view class="crop-status {{item.status}}">
+          <text>{{item.statusText}}</text>
+        </view>
+      </view>
+      
+      <view class="crop-body">
+        <view class="crop-stage">
+          <text class="stage-label">生长阶段</text>
+          <text class="stage-value">{{item.stage}}</text>
+        </view>
+        <view class="crop-date">
+          <text class="date-label">种植日期</text>
+          <text class="date-value">{{item.plantDate}}</text>
+        </view>
+      </view>
+      
+      <view class="crop-footer">
+        <text class="crop-days">已种植 {{item.days}} 天</text>
+        <text class="crop-arrow">></text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">🌱</text>
+    <text class="empty-text">还没有添加作物</text>
+    <text class="empty-hint">点击上方"添加作物"开始记录</text>
+    <view class="empty-btn" bindtap="goToAdd">
+      <text>添加第一个作物</text>
+    </view>
+  </view>
+  
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-overlay">
+    <view class="loading-spinner"></view>
+  </view>
+</view>

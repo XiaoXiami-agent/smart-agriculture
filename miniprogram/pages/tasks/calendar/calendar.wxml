@@ -1,0 +1,64 @@
+<!-- 农事日历页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">农事日历</text>
+  </view>
+  
+  <!-- 日历组件 -->
+  <view class="calendar-section">
+    <view class="calendar-header">
+      <view class="month-nav">
+        <text class="nav-btn" bindtap="prevMonth">‹</text>
+        <text class="month-label">{{year}}年{{month}}月</text>
+        <text class="nav-btn" bindtap="nextMonth">›</text>
+      </view>
+    </view>
+    
+    <view class="calendar-week">
+      <text wx:for="{{weekDays}}" wx:key="index" class="week-day">{{item}}</text>
+    </view>
+    
+    <view class="calendar-grid">
+      <view class="calendar-row" wx:for="{{calendarRows}}" wx:key="index">
+        <view class="calendar-cell {{cell.today ? 'today' : ''}} {{cell.hasTask ? 'has-task' : ''}}" 
+              wx:for="{{item}}" 
+              wx:for-item="cell"
+              wx:key="index"
+              bindtap="selectDate" 
+              data-date="{{cell.date}}">
+          <text class="cell-day">{{cell.day}}</text>
+          <view class="task-dot" wx:if="{{cell.hasTask}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 日期任务列表 -->
+  <view class="task-section">
+    <view class="section-header">
+      <text class="section-title">{{selectedDate}} 日任务</text>
+    </view>
+    
+    <view class="task-list" wx:if="{{dateTasks.length > 0}}">
+      <view class="task-item" wx:for="{{dateTasks}}" wx:key="_id">
+        <text class="task-icon">{{item.typeIcon}}</text>
+        <view class="task-info">
+          <text class="task-name">{{item.title}}</text>
+          <text class="task-crop">{{item.cropName}}</text>
+        </view>
+        <view class="task-status {{item.status}}">
+          <text>{{item.status === 'done' ? '已完成' : '待完成'}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="empty-task" wx:else>
+      <text class="empty-icon">📅</text>
+      <text class="empty-text">暂无任务</text>
+    </view>
+  </view>
+</view>

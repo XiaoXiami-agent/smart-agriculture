@@ -1,0 +1,116 @@
+<!-- 设置页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">设置</text>
+  </view>
+  
+  <!-- 位置设置 -->
+  <view class="settings-section">
+    <view class="section-title">位置设置</view>
+    <view class="settings-item" bindtap="changeLocation">
+      <view class="item-left">
+        <text class="item-icon">📍</text>
+        <view class="item-content">
+          <text class="item-label">当前位置</text>
+          <text class="item-value">{{location}}</text>
+        </view>
+      </view>
+      <text class="item-arrow">></text>
+    </view>
+  </view>
+  
+  <!-- 预警设置 -->
+  <view class="settings-section">
+    <view class="section-title">天气预警</view>
+    
+    <view class="settings-item toggle-item">
+      <view class="item-left">
+        <text class="item-icon">❄️</text>
+        <text class="item-label">霜冻预警</text>
+      </view>
+      <switch checked="{{alerts.frost}}" bindchange="toggleAlert" data-type="frost" color="#4CAF50"/>
+    </view>
+    
+    <view class="settings-item toggle-item">
+      <view class="item-left">
+        <text class="item-icon">🔥</text>
+        <text class="item-label">高温预警</text>
+      </view>
+      <switch checked="{{alerts.highTemp}}" bindchange="toggleAlert" data-type="highTemp" color="#4CAF50"/>
+    </view>
+    
+    <view class="settings-item toggle-item">
+      <view class="item-left">
+        <text class="item-icon">🌧️</text>
+        <text class="item-label">暴雨预警</text>
+      </view>
+      <switch checked="{{alerts.heavyRain}}" bindchange="toggleAlert" data-type="heavyRain" color="#4CAF50"/>
+    </view>
+    
+    <view class="settings-item toggle-item">
+      <view class="item-left">
+        <text class="item-icon">🏜️</text>
+        <text class="item-label">干旱预警</text>
+      </view>
+      <switch checked="{{alerts.drought}}" bindchange="toggleAlert" data-type="drought" color="#4CAF50"/>
+    </view>
+  </view>
+  
+  <!-- 通用设置 -->
+  <view class="settings-section">
+    <view class="section-title">通用设置</view>
+    
+    <view class="settings-item">
+      <view class="item-left">
+        <text class="item-icon">🔔</text>
+        <text class="item-label">消息通知</text>
+      </view>
+      <switch checked="{{notification}}" bindchange="toggleNotification" color="#4CAF50"/>
+    </view>
+    
+    <view class="settings-item" bindtap="clearCache">
+      <view class="item-left">
+        <text class="item-icon">🗑️</text>
+        <view class="item-content">
+          <text class="item-label">清除缓存</text>
+          <text class="item-value">{{cacheSize}}</text>
+        </view>
+      </view>
+      <text class="item-arrow">></text>
+    </view>
+  </view>
+  
+  <!-- 关于 -->
+  <view class="settings-section">
+    <view class="section-title">关于</view>
+    
+    <view class="settings-item" bindtap="checkUpdate">
+      <view class="item-left">
+        <text class="item-icon">📱</text>
+        <view class="item-content">
+          <text class="item-label">检查更新</text>
+          <text class="item-value">当前版本 1.0.0</text>
+        </view>
+      </view>
+      <text class="item-arrow">></text>
+    </view>
+    
+    <view class="settings-item" bindtap="showAbout">
+      <view class="item-left">
+        <text class="item-icon">ℹ️</text>
+        <text class="item-label">关于我们</text>
+      </view>
+      <text class="item-arrow">></text>
+    </view>
+  </view>
+  
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>智慧农业 App v1.0.0</text>
+    <text>让种植更简单</text>
+  </view>
+</view>

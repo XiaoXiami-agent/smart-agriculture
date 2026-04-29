@@ -1,0 +1,572 @@
+/* 首页样式 - 统一卡片风格 */
+page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f9eb 0%, #ffffff 100%);
+}
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航 */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  padding-top: calc(env(safe-area-inset-top) + 120rpx);
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 15rpx;
+  border-radius: 30rpx;
+  background: #f5f5f5;
+}
+
+.location-section {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.gps-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #07c160;
+  border-radius: 50%;
+  font-size: 28rpx;
+}
+
+.location-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.location-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.location-arrow {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 8rpx;
+}
+
+.lunar-date {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 主内容区 */
+.content {
+  flex: 1;
+  padding: 24rpx 30rpx;
+}
+
+/* 通用卡片 */
+.card-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.card-title-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.card-more {
+  font-size: 26rpx;
+  color: #07c160;
+}
+
+/* 天气卡片 */
+.weather-card {
+  background: linear-gradient(135deg, #07c160 0%, #10b981 100%);
+  border-radius: 24rpx;
+  padding: 40rpx 35rpx;
+  margin-bottom: 24rpx;
+  color: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(7, 193, 96, 0.3);
+}
+
+.weather-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 35rpx;
+}
+
+.temp-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp {
+  font-size: 120rpx;
+  font-weight: 200;
+  line-height: 1;
+  margin-bottom: 10rpx;
+}
+
+.weather-text {
+  font-size: 36rpx;
+  opacity: 0.9;
+}
+
+.weather-icon {
+  font-size: 100rpx;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-around;
+  padding: 25rpx 0;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-item {
+  text-align: center;
+}
+
+.detail-value {
+  font-size: 34rpx;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.detail-label {
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+.detail-divider {
+  width: 1rpx;
+  height: 50rpx;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.update-time {
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  opacity: 0.7;
+  margin-top: 20rpx;
+}
+
+/* 作物统计卡片 */
+.stats-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.stats-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.stats-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.stats-subtitle {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-circle {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.stats-circle.green {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.stats-circle.orange {
+  background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+}
+
+.stats-circle.yellow {
+  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+}
+
+.stats-num {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.stats-circle.green .stats-num {
+  color: #16a34a;
+}
+
+.stats-circle.orange .stats-num {
+  color: #ea580c;
+}
+
+.stats-circle.yellow .stats-num {
+  color: #ca8a04;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 预警卡片 */
+.alert-card {
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  color: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(239, 68, 68, 0.3);
+}
+
+.alert-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.alert-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.alert-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.alert-item {
+  font-size: 28rpx;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.alert-item:last-child {
+  border-bottom: none;
+}
+
+/* 农事建议卡片 */
+.advice-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.advice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.advice-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+  background: #f8f8f8;
+}
+
+.advice-item.success {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+.advice-item.warning {
+  background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+}
+
+.advice-item.danger {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+.advice-item.info {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.advice-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.advice-text {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* 天气预报卡片 */
+.forecast-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.forecast-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+}
+
+.forecast-day {
+  width: 70rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.forecast-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.forecast-weather {
+  flex: 1;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.forecast-temp {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 待办任务卡片 */
+.tasks-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+}
+
+.task-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-name {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.task-crop {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.task-priority {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.task-priority.high {
+  background: #ef4444;
+}
+
+.task-priority.medium {
+  background: #f59e0b;
+}
+
+.task-priority.low {
+  background: #10b981;
+}
+
+.task-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50rpx;
+}
+
+.empty-icon {
+  font-size: 60rpx;
+  color: #10b981;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 灌溉监测入口 */
+.irrigation-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  border-radius: 24rpx;
+  padding: 35rpx;
+  margin-bottom: 24rpx;
+  color: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(8, 145, 178, 0.3);
+}
+
+.irrigation-icon {
+  width: 90rpx;
+  height: 90rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25rpx;
+}
+
+.irrigation-icon text {
+  font-size: 50rpx;
+}
+
+.irrigation-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.irrigation-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.irrigation-desc {
+  font-size: 26rpx;
+  opacity: 0.85;
+}
+
+.irrigation-arrow {
+  font-size: 40rpx;
+  opacity: 0.8;
+}
+
+/* 底部安全区 */
+.safe-bottom {
+  height: 60rpx;
+}
+
+/* 加载动画 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.loading-spinner {
+  width: 80rpx;
+  height: 80rpx;
+  border: 6rpx solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

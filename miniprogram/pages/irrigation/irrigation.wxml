@@ -1,0 +1,178 @@
+<!-- 灌溉管理页面 -->
+<view class="container">
+  <!-- 状态栏占位 -->
+  <view class="status-bar"></view>
+  
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">灌溉管理</text>
+  </view>
+  
+  <!-- 土壤湿度概览 -->
+  <view class="humidity-overview">
+    <view class="overview-header">
+      <text class="overview-icon">💧</text>
+      <view class="overview-info">
+        <text class="overview-title">土壤湿度监测</text>
+        <text class="overview-value">{{avgHumidity}}%</text>
+      </view>
+    </view>
+    <view class="humidity-bar">
+      <view class="humidity-fill" style="width: {{avgHumidity}}%"></view>
+    </view>
+    <view class="humidity-tips">
+      <text wx:for="{{humidityTips}}" wx:key="index" class="tip-item {{item.type}}">{{item.text}}</text>
+    </view>
+  </view>
+  
+  <!-- 作物灌溉状态 -->
+  <view class="crop-list">
+    <view class="section-title">各作物灌溉状态</view>
+    <view class="crop-item" wx:for="{{cropHumidity}}" wx:key="name" data-crop="{{item.name}}" bindtap="selectCrop">
+      <view class="crop-header">
+        <text class="crop-icon">{{item.icon}}</text>
+        <view class="crop-info">
+          <text class="crop-name">{{item.name}}</text>
+          <text class="crop-stage">{{item.stage}}</text>
+        </view>
+        <view class="humidity-status {{item.status}}">
+          <text>{{item.statusText}}</text>
+        </view>
+      </view>
+      <view class="humidity-progress">
+        <view class="progress-bar">
+          <view class="progress-fill {{item.status}}" style="width: {{item.humidity}}%"></view>
+        </view>
+        <text class="progress-value">{{item.humidity}}%</text>
+      </view>
+      <view class="irrigation-tip">
+        <text>{{item.tip}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 智能建议 -->
+  <view class="advice-section">
+    <view class="section-title">智能灌溉建议</view>
+    <view class="advice-list">
+      <view class="advice-item" wx:for="{{advices}}" wx:key="index">
+        <text class="advice-icon">{{item.icon}}</text>
+        <text class="advice-text">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 快速操作 -->
+  <view class="quick-actions">
+    <view class="action-btn primary" bindtap="refreshData">
+      <text>🔄 刷新数据</text>
+    </view>
+    <view class="action-btn" bindtap="viewHistory">
+      <text>📊 历史记录</text>
+    </view>
+  </view>
+</view>
+
+<!-- 历史记录弹窗 -->
+<view class="history-modal" wx:if="{{showHistory}}" catchtouchmove="preventTouchMove">
+  <view class="history-mask" bindtap="closeHistory"></view>
+  <view class="history-content">
+    <view class="history-header">
+      <text class="history-title">📊 历史记录</text>
+      <text class="history-close" bindtap="closeHistory">✕</text>
+    </view>
+    
+    <!-- 历史概览 -->
+    <view class="history-overview">
+      <view class="overview-item" wx:for="{{historyList}}" wx:key="date">
+        <view class="overview-date {{item.date == '今天' ? 'today' : ''}}">
+          <text>{{item.date}}</text>
+          <text class="date-str">{{item.dateStr}}</text>
+        </view>
+        <view class="overview-chart">
+          <view class="chart-bar" style="height: {{item.avgHumidity * 0.8}}rpx"></view>
+        </view>
+        <text class="overview-value {{item.avgHumidity < 40 ? 'low' : item.avgHumidity > 75 ? 'high' : 'normal'}}">{{item.avgHumidity}}%</text>
+      </view>
+    </view>
+    
+    <!-- 详细记录列表 -->
+    <view class="history-detail">
+      <view class="detail-title">近7日详细数据</view>
+      <view class="detail-list">
+        <view class="detail-item" wx:for="{{historyList}}" wx:key="date">
+          <view class="detail-date {{item.date == '今天' ? 'today' : ''}}">
+            <text>{{item.date}}</text>
+          </view>
+          <view class="detail-records">
+            <view class="record-item" wx:for="{{item.records}}" wx:key="crop" wx:for-item="record">
+              <text class="record-crop">{{record.crop}}</text>
+              <view class="record-bar-wrap">
+                <view class="record-bar" style="width: {{record.humidity}}%"></view>
+              </view>
+              <text class="record-value {{record.change > 0 ? 'up' : record.change < 0 ? 'down' : ''}}">{{record.humidity}}%</text>
+              <text class="record-change {{record.change > 0 ? 'up' : record.change < 0 ? 'down' : ''}}">{{record.change > 0 ? '+' : ''}}{{record.change}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="history-actions">
+      <view class="action-export" bindtap="exportData">
+        <text>📥 导出数据</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 作物详细历史弹窗 -->
+<view class="history-modal" wx:if="{{showCropDetail}}" catchtouchmove="preventTouchMove">
+  <view class="history-mask" bindtap="closeHistory"></view>
+  <view class="history-content">
+    <view class="history-header">
+      <text class="history-title">{{selectedCrop.icon}} {{selectedCrop.name}} 历史数据</text>
+      <text class="history-close" bindtap="closeHistory">✕</text>
+    </view>
+    
+    <!-- 7日趋势图 -->
+    <view class="trend-chart">
+      <view class="trend-title">近7日湿度趋势</view>
+      <view class="trend-container">
+        <view class="trend-bars">
+          <view class="trend-bar-wrap" wx:for="{{weekData}}" wx:key="date">
+            <view class="trend-bar" style="height: {{item.humidity * 0.6}}rpx; background: {{item.humidity < 40 ? '#FFC107' : item.humidity > 75 ? '#2196F3' : '#4CAF50'}}"></view>
+            <text class="trend-value">{{item.humidity}}%</text>
+          </view>
+        </view>
+        <view class="trend-labels">
+          <text wx:for="{{weekData}}" wx:key="date">{{item.date}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 统计数据 -->
+    <view class="crop-stats">
+      <view class="stat-item">
+        <text class="stat-label">当前湿度</text>
+        <text class="stat-value {{selectedCrop.status}}">{{selectedCrop.humidity}}%</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">平均湿度</text>
+        <text class="stat-value">{{avgHumidity}}%</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">变化趋势</text>
+        <text class="stat-value {{selectedCrop.humidity > avgHumidity ? 'up' : 'down'}}">{{selectedCrop.humidity > avgHumidity ? '↑偏高' : '↓偏低'}}</text>
+      </view>
+    </view>
+    
+    <!-- 关闭按钮 -->
+    <view class="history-actions">
+      <view class="action-close" bindtap="closeHistory">
+        <text>关闭</text>
+      </view>
+    </view>
+  </view>
+</view>

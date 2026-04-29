@@ -1,0 +1,176 @@
+<!-- 添加作物页面 -->
+<view class="page-container">
+  <!-- 顶部导航条 -->
+  <view class="top-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="icon">‹</text>
+      <text>返回</text>
+    </view>
+    <text class="page-title">添加新作物</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="content">
+    <!-- 页面说明卡片 -->
+    <view class="intro-card">
+      <text class="intro-icon">🌱</text>
+      <view class="intro-text">
+        <text class="intro-title">添加农作物</text>
+        <text class="intro-desc">记录您的作物信息，方便管理农事</text>
+      </view>
+    </view>
+
+    <!-- 作物类型选择 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">🏷️</text>
+        <text class="section-title">选择作物</text>
+        <text class="required-tag">必选</text>
+      </view>
+      <view class="type-grid">
+        <view class="type-item {{selectedCrop === 'tomato' ? 'active' : ''}}" 
+              data-value="tomato" data-type="蔬菜" data-icon="🍅" bindtap="selectCrop">
+          <text class="type-icon">🍅</text>
+          <text class="type-text">番茄</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'cucumber' ? 'active' : ''}}" 
+              data-value="cucumber" data-type="蔬菜" data-icon="🥒" bindtap="selectCrop">
+          <text class="type-icon">🥒</text>
+          <text class="type-text">黄瓜</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'pepper' ? 'active' : ''}}" 
+              data-value="pepper" data-type="蔬菜" data-icon="🌶️" bindtap="selectCrop">
+          <text class="type-icon">🌶️</text>
+          <text class="type-text">辣椒</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'eggplant' ? 'active' : ''}}" 
+              data-value="eggplant" data-type="蔬菜" data-icon="🍆" bindtap="selectCrop">
+          <text class="type-icon">🍆</text>
+          <text class="type-text">茄子</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'cabbage' ? 'active' : ''}}" 
+              data-value="cabbage" data-type="蔬菜" data-icon="🥬" bindtap="selectCrop">
+          <text class="type-icon">🥬</text>
+          <text class="type-text">白菜</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'corn' ? 'active' : ''}}" 
+              data-value="corn" data-type="粮食作物" data-icon="🌽" bindtap="selectCrop">
+          <text class="type-icon">🌽</text>
+          <text class="type-text">玉米</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'strawberry' ? 'active' : ''}}" 
+              data-value="strawberry" data-type="水果" data-icon="🍓" bindtap="selectCrop">
+          <text class="type-icon">🍓</text>
+          <text class="type-text">草莓</text>
+        </view>
+        <view class="type-item {{selectedCrop === 'grape' ? 'active' : ''}}" 
+              data-value="grape" data-type="水果" data-icon="🍇" bindtap="selectCrop">
+          <text class="type-icon">🍇</text>
+          <text class="type-text">葡萄</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 作物名称 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">🌿</text>
+        <text class="section-title">作物名称</text>
+        <text class="required-tag">必填</text>
+      </view>
+      <view class="input-wrapper">
+        <input class="text-input" 
+               placeholder="请输入作物名称" 
+               value="{{name}}" 
+               bindinput="onNameInput" />
+      </view>
+    </view>
+
+    <!-- 品种选择 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">🔬</text>
+        <text class="section-title">选择品种</text>
+        <text class="optional-tag">可选</text>
+      </view>
+      <view class="picker-wrapper">
+        <picker mode="selector" range="{{varieties}}" bindchange="onVarietyChange">
+          <view class="picker-row {{selectedVariety ? '' : 'empty'}}">
+            <text class="picker-text">{{selectedVariety || '选择品种'}}</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 种植日期 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📅</text>
+        <text class="section-title">种植日期</text>
+      </view>
+      <view class="picker-wrapper">
+        <picker mode="date" value="{{plantDate}}" bindchange="onDateChange">
+          <view class="picker-row {{plantDate ? '' : 'empty'}}">
+            <text class="picker-text">{{plantDate || '选择种植日期'}}</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 生长状态 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📈</text>
+        <text class="section-title">生长状态</text>
+      </view>
+      <view class="status-row">
+        <view class="status-item {{status === 'seedling' ? 'active' : ''}}" 
+              data-status="seedling" bindtap="selectStatus">
+          <text class="status-dot green"></text>
+          <text class="status-text">幼苗期</text>
+        </view>
+        <view class="status-item {{status === 'growth' ? 'active' : ''}}" 
+              data-status="growth" bindtap="selectStatus">
+          <text class="status-dot orange"></text>
+          <text class="status-text">生长期</text>
+        </view>
+        <view class="status-item {{status === 'harvest' ? 'active' : ''}}" 
+              data-status="harvest" bindtap="selectStatus">
+          <text class="status-dot yellow"></text>
+          <text class="status-text">待收获</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📝</text>
+        <text class="section-title">备注信息</text>
+        <text class="optional-tag">可选</text>
+      </view>
+      <view class="textarea-wrapper">
+        <textarea class="textarea-input" 
+                  placeholder="添加备注信息，如种植位置、特殊需求等" 
+                  value="{{notes}}" 
+                  bindinput="onNotesInput"
+                  maxlength="200"></textarea>
+        <text class="word-count">{{notes.length || 0}}/200</text>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <view class="btn-wrapper">
+      <view class="save-btn" bindtap="submitForm">
+        <text class="btn-icon">✓</text>
+        <text class="btn-text">保存作物</text>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="safe-area"></view>
+  </view>
+</view>

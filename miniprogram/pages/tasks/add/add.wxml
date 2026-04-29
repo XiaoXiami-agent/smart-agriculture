@@ -1,0 +1,156 @@
+<!-- 添加任务页面 -->
+<view class="page-container">
+  <!-- 顶部装饰条 -->
+  <view class="top-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="icon">‹</text>
+      <text>返回</text>
+    </view>
+    <text class="page-title">添加新任务</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="content">
+    <!-- 页面说明卡片 -->
+    <view class="intro-card">
+      <text class="intro-icon">📋</text>
+      <view class="intro-text">
+        <text class="intro-title">新建农事任务</text>
+        <text class="intro-desc">安排您的灌溉、施肥、除草等工作</text>
+      </view>
+    </view>
+
+    <!-- 任务类型选择 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">🏷️</text>
+        <text class="section-title">任务类型</text>
+        <text class="required-tag">必选</text>
+      </view>
+      <view class="type-grid">
+        <view class="type-item {{type === 'irrigation' ? 'active' : ''}}" 
+              data-type="irrigation" bindtap="selectType">
+          <text class="type-icon">💧</text>
+          <text class="type-text">灌溉</text>
+        </view>
+        <view class="type-item {{type === 'fertilization' ? 'active' : ''}}" 
+              data-type="fertilization" bindtap="selectType">
+          <text class="type-icon">🧪</text>
+          <text class="type-text">施肥</text>
+        </view>
+        <view class="type-item {{type === 'weeding' ? 'active' : ''}}" 
+              data-type="weeding" bindtap="selectType">
+          <text class="type-icon">🌿</text>
+          <text class="type-text">除草</text>
+        </view>
+        <view class="type-item {{type === 'inspection' ? 'active' : ''}}" 
+              data-type="inspection" bindtap="selectType">
+          <text class="type-icon">🔍</text>
+          <text class="type-text">检查</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 任务标题 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📝</text>
+        <text class="section-title">任务标题</text>
+        <text class="required-tag">必填</text>
+      </view>
+      <view class="input-wrapper">
+        <input class="text-input" 
+               placeholder="例如：给番茄浇水" 
+               value="{{title}}" 
+               bindinput="onTitleInput" />
+      </view>
+    </view>
+
+    <!-- 选择作物 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">🌱</text>
+        <text class="section-title">关联作物</text>
+        <text class="optional-tag">可选</text>
+      </view>
+      <view class="picker-wrapper">
+        <picker mode="selector" range="{{crops}}" range-key="name" bindchange="onCropChange">
+          <view class="picker-row {{cropName ? '' : 'empty'}}">
+            <text class="picker-text">{{cropName || '选择关联的作物'}}</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 截止日期 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📅</text>
+        <text class="section-title">截止日期</text>
+      </view>
+      <view class="picker-wrapper">
+        <picker mode="date" value="{{dueDate}}" bindchange="onDateChange">
+          <view class="picker-row {{dueDate ? '' : 'empty'}}">
+            <text class="picker-text">{{dueDate || '选择截止日期'}}</text>
+            <text class="picker-arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- 优先级 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">⭐</text>
+        <text class="section-title">优先级</text>
+      </view>
+      <view class="priority-row">
+        <view class="priority-item {{priority === 'high' ? 'active high' : ''}}" 
+              data-priority="high" bindtap="selectPriority">
+          <text class="priority-dot red"></text>
+          <text class="priority-text">高</text>
+        </view>
+        <view class="priority-item {{priority === 'medium' ? 'active medium' : ''}}" 
+              data-priority="medium" bindtap="selectPriority">
+          <text class="priority-dot orange"></text>
+          <text class="priority-text">中</text>
+        </view>
+        <view class="priority-item {{priority === 'low' ? 'active low' : ''}}" 
+              data-priority="low" bindtap="selectPriority">
+          <text class="priority-dot green"></text>
+          <text class="priority-text">低</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="form-section">
+      <view class="section-header">
+        <text class="section-icon">📝</text>
+        <text class="section-title">备注信息</text>
+        <text class="optional-tag">可选</text>
+      </view>
+      <view class="textarea-wrapper">
+        <textarea class="textarea-input" 
+                  placeholder="添加任务详情，如操作步骤、注意事项等" 
+                  value="{{notes}}" 
+                  bindinput="onNotesInput"
+                  maxlength="200"></textarea>
+        <text class="word-count">{{notes.length || 0}}/200</text>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <view class="btn-wrapper">
+      <view class="save-btn" bindtap="submitForm">
+        <text class="btn-icon">✓</text>
+        <text class="btn-text">保存任务</text>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="safe-area"></view>
+  </view>
+</view>

@@ -1,0 +1,184 @@
+/* 编辑作物页面样式 */
+page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 20rpx 30rpx;
+}
+
+.status-bar {
+  height: 60rpx;
+}
+
+.back-btn {
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  color: #4CAF50;
+  font-size: 30rpx;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 40rpx;
+}
+
+/* 区块 */
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 25rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+/* 作物类型选择 */
+.crop-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.crop-option {
+  width: 150rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  border: 4rpx solid transparent;
+}
+
+.crop-option.active {
+  background: #E8F5E9;
+  border-color: #4CAF50;
+}
+
+.crop-option-icon {
+  font-size: 50rpx;
+  margin-bottom: 10rpx;
+}
+
+.crop-option-name {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.crop-option.active .crop-option-name {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+/* 输入框 */
+.input-field {
+  width: 100%;
+  padding: 25rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* picker选择器 */
+.picker-box {
+  width: 100%;
+  position: relative;
+}
+
+picker {
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+picker::after {
+  content: '';
+  display: block;
+}
+
+/* 选择器包装 */
+.picker-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 25rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: #333;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.picker-wrap.placeholder {
+  color: #999;
+}
+
+.picker-value {
+  font-size: 30rpx;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 20rpx;
+}
+
+.picker-wrap.placeholder .picker-value {
+  color: #bbb;
+}
+
+.picker-arrow {
+  color: #bbb;
+  font-size: 28rpx;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+/* 文本域 */
+.textarea-field {
+  width: 100%;
+  padding: 25rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  color: #333;
+  box-sizing: border-box;
+  min-height: 150rpx;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  background: #4CAF50;
+  color: #fff;
+  text-align: center;
+  padding: 30rpx;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+}
+
+.submit-btn:active {
+  opacity: 0.8;
+}

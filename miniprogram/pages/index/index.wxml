@@ -1,0 +1,196 @@
+<!-- 农业App首页 -->
+<wxs module="utils">
+module.exports = {
+  getDayName: function(dateStr) {
+    var today = getDate()
+    var todayStr = today.getFullYear() + '-' + 
+      (today.getMonth() + 1 < 10 ? '0' : '') + (today.getMonth() + 1) + '-' + 
+      (today.getDate() < 10 ? '0' : '') + today.getDate()
+    var tomorrow = getDate()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    var tomorrowStr = tomorrow.getFullYear() + '-' + 
+      (tomorrow.getMonth() + 1 < 10 ? '0' : '') + (tomorrow.getMonth() + 1) + '-' + 
+      (tomorrow.getDate() < 10 ? '0' : '') + tomorrow.getDate()
+    if (dateStr === todayStr) return '今天'
+    if (dateStr === tomorrowStr) return '明天'
+    var date = getDate(dateStr)
+    var weekDays = ['周日','周一','周二','周三','周四','周五','周六']
+    return weekDays[date.getDay()]
+  },
+  getWeatherIcon: function(text) {
+    if (text.indexOf('晴') >= 0) return '☀'
+    if (text.indexOf('多云') >= 0) return '☁'
+    if (text.indexOf('阴') >= 0) return '☁'
+    if (text.indexOf('雨') >= 0) return '☔'
+    if (text.indexOf('雪') >= 0) return '❄'
+    if (text.indexOf('雾') >= 0 || text.indexOf('霾') >= 0) return '🌫️'
+    return '○'
+  }
+}
+</wxs>
+
+<view class="page-container">
+  <!-- 顶部导航 -->
+  <view class="top-bar">
+    <view class="location-section">
+      <picker mode="selector" range="{{cityList}}" bindchange="onCityChange">
+        <view class="location-info">
+          <text class="location-icon">📍</text>
+          <text class="location-name">{{location}}</text>
+          <text class="location-arrow">▼</text>
+        </view>
+      </picker>
+      <view class="gps-btn" bindtap="getCurrentLocation">
+        <text>🧭</text>
+      </view>
+    </view>
+    <text class="lunar-date">{{lunar}}</text>
+  </view>
+
+  <!-- 主内容 -->
+  <view class="content">
+    <!-- 天气主卡片 -->
+    <view class="weather-card" wx:if="{{now}}">
+      <view class="weather-main">
+        <view class="temp-section">
+          <text class="temp">{{now.temp}}°</text>
+          <text class="weather-text">{{now.text}}</text>
+        </view>
+        <text class="weather-icon">{{utils.getWeatherIcon(now.text)}}</text>
+      </view>
+      <view class="weather-details">
+        <view class="detail-item">
+          <text class="detail-value">{{now.feelsLike}}°</text>
+          <text class="detail-label">体感</text>
+        </view>
+        <view class="detail-divider"></view>
+        <view class="detail-item">
+          <text class="detail-value">{{now.humidity}}%</text>
+          <text class="detail-label">湿度</text>
+        </view>
+        <view class="detail-divider"></view>
+        <view class="detail-item">
+          <text class="detail-value">{{now.windDir}}</text>
+          <text class="detail-label">{{now.windScale}}级</text>
+        </view>
+      </view>
+      <text class="update-time">更新时间: {{now.obsTime}}</text>
+    </view>
+
+    <!-- 作物统计卡片 -->
+    <view class="stats-card">
+      <view class="stats-header">
+        <text class="stats-title">🌱 我的作物</text>
+        <text class="stats-subtitle">共 {{cropStats.total}} 种作物</text>
+      </view>
+      <view class="stats-grid">
+        <view class="stats-item">
+          <view class="stats-circle green">
+            <text class="stats-num">{{cropStats.growth}}</text>
+          </view>
+          <text class="stats-label">生长期</text>
+        </view>
+        <view class="stats-item">
+          <view class="stats-circle orange">
+            <text class="stats-num">{{cropStats.seedling}}</text>
+          </view>
+          <text class="stats-label">幼苗期</text>
+        </view>
+        <view class="stats-item">
+          <view class="stats-circle yellow">
+            <text class="stats-num">{{cropStats.harvest}}</text>
+          </view>
+          <text class="stats-label">待收获</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 预警卡片 -->
+    <view class="alert-card" wx:if="{{alerts.length > 0}}">
+      <view class="alert-header">
+        <text class="alert-icon">⚠️</text>
+        <text class="alert-title">天气预警</text>
+      </view>
+      <view class="alert-list">
+        <view class="alert-item" wx:for="{{alerts}}" wx:key="index">
+          <text>{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 农事建议卡片 -->
+    <view class="advice-card">
+      <view class="card-header">
+        <text class="card-title-icon">💡</text>
+        <text class="card-title">今日农事建议</text>
+      </view>
+      <view class="advice-list">
+        <view class="advice-item {{item.type}}" wx:for="{{advices}}" wx:key="index">
+          <text class="advice-icon">{{item.icon}}</text>
+          <text class="advice-text">{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 天气预报卡片 -->
+    <view class="forecast-card" wx:if="{{forecast}}">
+      <view class="card-header">
+        <text class="card-title-icon">📅</text>
+        <text class="card-title">天气预报</text>
+      </view>
+      <view class="forecast-list">
+        <view class="forecast-item" wx:for="{{forecast.daily}}" wx:key="fxDate">
+          <text class="forecast-day">{{utils.getDayName(item.fxDate)}}</text>
+          <text class="forecast-icon">{{utils.getWeatherIcon(item.textDay)}}</text>
+          <text class="forecast-weather">{{item.textDay}}</text>
+          <text class="forecast-temp">{{item.tempMin}}° - {{item.tempMax}}°</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 今日待办卡片 -->
+    <view class="tasks-card">
+      <view class="card-header">
+        <text class="card-title-icon">📋</text>
+        <text class="card-title">今日待办</text>
+        <text class="card-more" bindtap="goToTasks">查看全部 ›</text>
+      </view>
+      <view class="task-list" wx:if="{{todayTasks.length > 0}}">
+        <view class="task-item" wx:for="{{todayTasks}}" wx:key="_id">
+          <view class="task-left">
+            <text class="task-icon">{{item.typeIcon}}</text>
+            <view class="task-info">
+              <text class="task-name">{{item.title}}</text>
+              <text class="task-crop">{{item.cropName}}</text>
+            </view>
+          </view>
+          <view class="task-priority {{item.priority}}"></view>
+        </view>
+      </view>
+      <view class="task-empty" wx:else>
+        <text class="empty-icon">✓</text>
+        <text class="empty-text">今日暂无待办任务</text>
+      </view>
+    </view>
+
+    <!-- 灌溉监测入口 -->
+    <view class="irrigation-card" bindtap="goToIrrigation">
+      <view class="irrigation-icon">
+        <text>💧</text>
+      </view>
+      <view class="irrigation-content">
+        <text class="irrigation-title">灌溉监测</text>
+        <text class="irrigation-desc">查看土壤湿度数据</text>
+      </view>
+      <text class="irrigation-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="safe-bottom"></view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-overlay">
+    <view class="loading-spinner"></view>
+  </view>
+</view>
